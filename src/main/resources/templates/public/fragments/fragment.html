@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Fragment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/animate.css">
+  <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/assets/css/aos.css">
+  <link rel="stylesheet" href="/assets/css/ionicons.min.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/assets/css/jquery.timepicker.css">
+  <link rel="stylesheet" href="/assets/css/css/bootstrap-reboot.css">
+  <link rel="stylesheet" href="/assets/css/css/mixins/_text-hide.css">
+  <link rel="stylesheet" href="/assets/css/flaticon.css">
+  <link rel="stylesheet" href="/assets/css/icomoon.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap-grid.css">
+  <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap-reboot.css">
+
+  <!-- JS -->
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/assets/js/popper.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/jquery.easing.1.3.js"></script>
+  <script src="/assets/js/jquery.waypoints.min.js"></script>
+  <script src="/assets/js/jquery.stellar.min.js"></script>
+  <script src="/assets/js/owl.carousel.min.js"></script>
+  <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="/assets/js/aos.js"></script>
+  <script src="/assets/js/jquery.animateNumber.min.js"></script>
+  <script src="/assets/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="/assets/js/google-map.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+  <nav th:fragment="navbar" class="header_menu navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container-fluid px-md-4	">
+      <a class="navbar-brand" href="/">Work CV</a>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="/" class="nav-link">Trang chủ</a></li>
+<!--          <li class="nav-item"><a th:href="@{/home/list-job}" class="nav-link">Công việc</a></li>-->
+<!--          <li th:if="${session.user}" class="nav-item"><a th:if="${session.user.role.id==1}" href="/" class="nav-link">Ứng cử viên</a></li>-->
+          <li th:if="${session.user}" class="nav-item"><a th:href="@{'/home/profile/'+${session.user.id}}" th:text="${session.user.fullName}" class="nav-link" ></a>
+            <ul class="dropdown">
+              <li>
+                <a th:if="${session.user}" th:href="@{'/home/profile/'+${session.user.id}}">Hồ Sơ</a>
+              </li>
+              <li th:if="${session.user}"><a th:if="${session.user.role.id==2}" th:href="@{/user/get-list-job}" >Công việc đã lưu</a></li>
+              <li th:if="${session.user}"><a th:if="${session.user.role.id==1}" th:href="@{/user/list-post}" >Danh sách bài đăng</a></li>
+              <li th:if="${session.user}"><a th:if="${session.user.role.id==2}" th:href="@{/user/get-list-apply}" >Công việc đã ứng tuyển</a></li>
+              <li th:if="${session.user}"><a th:if="${session.user.role.id==2}" th:href="@{/user/get-list-company}" >Công ty đã theo dõi</a></li>
+              <li><a th:href="@{/auth/logout}" >Đăng xuất</a></li>
+            </ul>
+          </li>
+          <li th:if="${session.user}" class="nav-item cta mr-md-1"><a th:if="${session.user.role.id==1}" th:href="@{/recruitment/post}" class="nav-link">Đăng tuyển</a></li>
+          <li th:unless="${session.user}" class="nav-item cta cta-colored"><a th:href="@{/auth/login}" class="nav-link">Đăng nhập</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  <div th:fragment="footer" class="footer ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+
+          <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://truongvhfx20894.github.io/ASM3.github.io/" target="_blank">Vương Hữu Trường</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
